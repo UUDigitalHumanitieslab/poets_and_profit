@@ -11,6 +11,26 @@ class ParsedFile:
     def set_source(self, source):
         self.source = source
 
+    @staticmethod
+    def csv_title_row():
+         return [
+            'publication_idno',
+            'title',
+            'author',
+            'publisher',
+            'year_published',
+            'chapters']
+    
+    def to_csv_row(self):
+        return [
+            self.publication_idno,
+            self.title, 
+            self.author,
+            self.publisher,
+            self.year_published,
+            len(self.chapters)
+        ]
+
     def print(self):
         indent = "    "
         print(self.title)
@@ -18,7 +38,7 @@ class ParsedFile:
         print(indent + self.publication_idno)        
         print(indent + self.publisher)
         print(indent + self.year_published)
-
+        print(indent + 'Chapters: {}'.format(len(self.chapters)))
 
 class ExplorationResult:
     def __init__(self):

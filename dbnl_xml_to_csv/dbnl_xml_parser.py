@@ -1,4 +1,3 @@
-import text_utils
 from my_helpers import remove_tabs_and_newlines
 import xml.etree.ElementTree as ET
 import re
@@ -41,6 +40,18 @@ def set_year_published(parsedFile):
         parsedFile.year_published = found.group(0) if found is not None else '0'
     else:
         raise Exception('set_year_published requires a ParsedFile instance with publisher set')
+
+def set_text(root, parsedFile):
+    cf_chapter_node = root.find(".//text/body/cf/div[@type='chapter']")
+    if cf_chapter_node:
+        parsedFile.cf_chapter = extract_text_without_html(cf_chapter_node)    
+    
+    chapters = []
+    for chapter_node in root.findall(".//text/body/div[@type='chapter']"):
+        chapters.append(extract_text_without_html(chapter_node))
+
+    parsedFile.chapters = chapters
+             
 
 def remove_hi_elements(node):
     node_string = ET.tostring(node).decode('utf8')

@@ -1,19 +1,37 @@
 import xml.etree.ElementTree as ET
 import os
+import sys
+import csv
 import my_helpers
-import entities
+from entities import ParsedFile
 from operator import attrgetter
 from dbnl_xml_parser import *
 
-output_file = os.path.join(my_helpers.get_script_dir(), 'output.csv')
+def print_usage():
+    print("    ******     DBNL-XML TO CSV      ******")
+    print("    dbnl_xml_to_csv.py [input_folder] [output_file]")
+    print("    Example: dbnl_xml_to_csv.py \"C:\\testfiles\" \"C:\\output.csv\"")
+    print("\n")
+    exit(1)
 
-xml_dir = os.path.join(my_helpers.get_script_dir(), '..\\testbestanden') #'test_xml_weinig_files')
+args = sys.argv
 
-for f in my_helpers.get_files_from_dir_r(xml_dir, '.xml'):
-    #print("Now processing: '{}'".format(f))
-    parsedFile = entities.ParsedFile(f)
+if (len(args) == 2 and (args[1] in ['?', '-?', 'help', '-help'])):
+    print_usage()
+elif len(args) != 3:
+    print_usage()
+
+input_folder = args[1] 
+output_file = args[2] #os.path.join(my_helpers.get_script_dir(), 'test_xml_weinig_files') #'..\\testbestanden') # 
+
+if not os.path.isdir(input_folder):
+    print("'{}' is not a folder".format(input_folder))
+    print_usage()
+
+def parse_file(file):
+    parsedFile = ParsedFile(file)
     
-    tree = ET.parse(f)
+    tree = ET.parse(file)
     root = tree.getroot()
     
     set_author(root, parsedFile)
@@ -22,8 +40,19 @@ for f in my_helpers.get_files_from_dir_r(xml_dir, '.xml'):
     set_used_copy(root, parsedFile)
     set_publisher(root, parsedFile)
     set_year_published(parsedFile)
+    set_text(root, parsedFile)
 
-    parsedFile.print()
+    return parsedFile
+
+with open(output_file, 'w') as csv_file:
+    writer = csv.writer(csv_file, delimiter='$', lineterminator='\n')
+    writer.writerow(ParsedFile.csv_title_row())
+    
+    for f in my_helpers.get_files_from_dir_r(input_folder, '.xml'):
+        print("Now processing: '{}'".format(f))
+        
+        parsedFile = parse_file(f)
+        writer.writerow(parsedFile.to_csv_row())
 
 print ('done!')
             
