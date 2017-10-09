@@ -22,5 +22,5 @@ env
 *.yaml
 *.txt
 /testbestanden
-/CleanXml
+/corpus
 *.csv
