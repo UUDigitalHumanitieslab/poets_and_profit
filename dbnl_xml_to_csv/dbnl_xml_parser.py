@@ -47,7 +47,7 @@ def set_text(root, parsedFile):
         parsedFile.cf_chapter = extract_text_without_html(cf_chapter_node)    
     
     chapters = []
-    for chapter_node in root.findall(".//text/body/div[@type='chapter']"):
+    for chapter_node in root.findall(".//text/body/div[@type='chapter']"):        
         chapters.append(extract_text_without_html(chapter_node))
 
     parsedFile.chapters = chapters

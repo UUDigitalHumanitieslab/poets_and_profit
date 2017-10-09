@@ -12,16 +12,28 @@ class ParsedFile:
         self.source = source
 
     @staticmethod
-    def csv_title_row():
-         return [
-            'publication_idno',
-            'title',
-            'author',
-            'publisher',
-            'year_published',
-            'chapters']
+    def csv_title_row(has_each_chapter_on_new_row):
+        if (has_each_chapter_on_new_row):
+            return [
+                'id',
+                'document_id',
+                'title',
+                'author',
+                'chapter_id',
+                'publisher_info',
+                'year_published',
+                'text'            
+            ]
+        else:
+            return [
+                'id',
+                'title',
+                'author',
+                'publisher_info',
+                'year_published',
+                'text']
     
-    def to_csv_row(self):
+    def to_csv_row_complete_text(self):
         return [
             self.publication_idno,
             self.title, 
@@ -30,6 +42,22 @@ class ParsedFile:
             self.year_published,
             len(self.chapters)
         ]
+
+    def to_csv_rows_per_chapter(self):
+        rows = []
+        for index, chapter in enumerate(self.chapters):
+            new_row = [
+                "{}_{}".format(self.publication_idno, index + 1),
+                self.publication_idno,
+                self.title, 
+                self.author,
+                index + 1,
+                self.publisher,
+                self.year_published,
+                chapter 
+            ]            
+            rows.append(new_row)
+        return rows
 
     def print(self):
         indent = "    "

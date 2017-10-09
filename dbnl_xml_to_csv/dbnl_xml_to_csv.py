@@ -9,20 +9,26 @@ from dbnl_xml_parser import *
 
 def print_usage():
     print("    ******     DBNL-XML TO CSV      ******")
-    print("    dbnl_xml_to_csv.py [input_folder] [output_file]")
-    print("    Example: dbnl_xml_to_csv.py \"C:\\testfiles\" \"C:\\output.csv\"")
+    print("    dbnl_xml_to_csv.py [input_folder] [output_file] optional: [-chapters]")
+    print("    Provide the 'chapters' argument to print each chapter on a separate line in the csv")
+    print("    Example: dbnl_xml_to_csv.py \"C:\\testfiles\" \"C:\\output.csv\" -chapters")
     print("\n")
     exit(1)
 
 args = sys.argv
 
-if (len(args) == 2 and (args[1] in ['?', '-?', 'help', '-help'])):
+# validate args
+if len(args) == 2 and (args[1] in ['?', '-?', 'help', '-help']):
     print_usage()
-elif len(args) != 3:
+elif len(args) != 3 and len(args) != 4:
+    print("incorrect number of arguments")
+    print_usage()
+elif len(args) == 4 and ((args[3].upper() != '-CHAPTER') and (args[3].upper() != '-C')):
     print_usage()
 
 input_folder = args[1] 
-output_file = args[2] #os.path.join(my_helpers.get_script_dir(), 'test_xml_weinig_files') #'..\\testbestanden') # 
+output_file = args[2] 
+has_each_chapter_on_new_row = len(args) == 4
 
 if not os.path.isdir(input_folder):
     print("'{}' is not a folder".format(input_folder))
@@ -46,13 +52,18 @@ def parse_file(file):
 
 with open(output_file, 'w') as csv_file:
     writer = csv.writer(csv_file, delimiter='$', lineterminator='\n')
-    writer.writerow(ParsedFile.csv_title_row())
+    writer.writerow(ParsedFile.csv_title_row(has_each_chapter_on_new_row))
     
     for f in my_helpers.get_files_from_dir_r(input_folder, '.xml'):
         print("Now processing: '{}'".format(f))
         
         parsedFile = parse_file(f)
-        writer.writerow(parsedFile.to_csv_row())
+
+        if (has_each_chapter_on_new_row):
+            for row in parsedFile.to_csv_rows_per_chapter():
+                writer.writerow(row)
+        else:
+            writer.writerow(parsedFile.to_csv_row_complete_text())
 
 print ('done!')
             
