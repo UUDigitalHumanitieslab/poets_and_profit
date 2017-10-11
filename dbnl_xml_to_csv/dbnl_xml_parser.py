@@ -9,7 +9,7 @@ def set_used_copy(root, parsedFile):
             return
 
     editionStmt = root.find('.//editionStmt')
-    if editionStmt[0].text and editionStmt[0].text.upper() == "GEBRUIKT EXEMPLAAR":
+    if editionStmt and editionStmt[0].text and editionStmt[0].text.upper() == "GEBRUIKT EXEMPLAAR":
         parsedFile.used_copy = editionStmt[1].text
         return
 

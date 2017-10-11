@@ -40,8 +40,9 @@ class ParsedFile:
             self.author,
             self.publisher,
             self.year_published,
-            len(self.chapters)
+            "".join(self.chapters)
         ]
+        
 
     def to_csv_rows_per_chapter(self):
         rows = []

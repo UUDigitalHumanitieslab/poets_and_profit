@@ -23,7 +23,7 @@ if len(args) == 2 and (args[1] in ['?', '-?', 'help', '-help']):
 elif len(args) != 3 and len(args) != 4:
     print("incorrect number of arguments")
     print_usage()
-elif len(args) == 4 and ((args[3].upper() != '-CHAPTER') and (args[3].upper() != '-C')):
+elif len(args) == 4 and ((args[3].upper() != '-CHAPTERS') and (args[3].upper() != '-C')):
     print_usage()
 
 input_folder = args[1] 
@@ -50,7 +50,7 @@ def parse_file(file):
 
     return parsedFile
 
-with open(output_file, 'w') as csv_file:
+with open(output_file, 'w', encoding='utf8') as csv_file:
     writer = csv.writer(csv_file, delimiter='$', lineterminator='\n')
     writer.writerow(ParsedFile.csv_title_row(has_each_chapter_on_new_row))
     
