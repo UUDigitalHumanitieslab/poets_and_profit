@@ -45,7 +45,7 @@ for mfilename in input_files:
        original_file = path.join(input_folder, mfilename) 
 
        # bestand opschonen en nieuw bestand terug geven
-       with  open(original_file,'r', encoding='utf8') as inputFile:
+       with open(original_file,'r', encoding='utf8') as inputFile:
             resultfile = path.join(result_folder, mfilename)
             
             print ("Now processing: '{}'".format(mfilename))

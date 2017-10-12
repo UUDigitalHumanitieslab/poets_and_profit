@@ -51,7 +51,7 @@ def parse_file(file):
     return parsedFile
 
 with open(output_file, 'w', encoding='utf8') as csv_file:
-    writer = csv.writer(csv_file, delimiter='$', lineterminator='\n')
+    writer = csv.writer(csv_file, delimiter='$', lineterminator='\n', dialect='excel')
     writer.writerow(ParsedFile.csv_title_row(has_each_chapter_on_new_row))
     
     for f in my_helpers.get_files_from_dir_r(input_folder, '.xml'):

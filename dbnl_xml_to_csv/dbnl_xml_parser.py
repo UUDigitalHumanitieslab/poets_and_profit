@@ -54,16 +54,16 @@ def set_text(root, parsedFile):
              
 
 def remove_hi_elements(node):
-    node_string = ET.tostring(node).decode('utf8')
+    node_string = ET.tostring(node, encoding='unicode', method='xml')
     return re.sub('<p>|<hi rend=".*">|<hi>|</hi>|</p>', '', node_string)
 
 def extract_text_without_html(node_containing_text):    
     collected_strings = []
     get_text_recursive(node_containing_text, collected_strings)
-    return (''.join(collected_strings))
+    return (' '.join(collected_strings))
 
 def get_text_recursive(node, collected_strings):
-    if node.text:
+    if node.tag != "note" and node.text and not (node.tag == "hi" and len(node.text) < 3):       
         text = node.text
         text = remove_tabs_and_newlines(text).strip()
         collected_strings.append(text)
