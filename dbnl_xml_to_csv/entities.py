@@ -46,6 +46,7 @@ class ParsedFile:
 
     def to_csv_rows_per_chapter(self):
         rows = []
+                
         for index, chapter in enumerate(self.chapters):
             new_row = [
                 "{}_{}".format(self.publication_idno, index + 1),
@@ -55,7 +56,7 @@ class ParsedFile:
                 index + 1,
                 self.publisher,
                 self.year_published,
-                chapter 
+                chapter
             ]            
             rows.append(new_row)
         return rows

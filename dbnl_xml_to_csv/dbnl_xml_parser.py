@@ -42,11 +42,12 @@ def set_year_published(parsedFile):
         raise Exception('set_year_published requires a ParsedFile instance with publisher set')
 
 def set_text(root, parsedFile):
+    chapters = []
+    
     cf_chapter_node = root.find(".//text/body/cf/div[@type='chapter']")
     if cf_chapter_node:
-        parsedFile.cf_chapter = extract_text_without_html(cf_chapter_node)    
+        chapters.append(extract_text_without_html(cf_chapter_node))
     
-    chapters = []
     for chapter_node in root.findall(".//text/body/div[@type='chapter']"):        
         chapters.append(extract_text_without_html(chapter_node))
 
