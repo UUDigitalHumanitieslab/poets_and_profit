@@ -7,10 +7,14 @@ The scripts in this project work together to extract relevant information and da
 
 - `remove_html_entities_from_xml` is a helper script that reads all xml files from a folder and replaces html-entities in them. Note that the list of html-entities replaced is not exhaustive (more below).
 
+- `split_documents` is a script that extracts rows from an Excelsheet and writes the content of each row to a separate txt file. 
+
 
 **Prerequisites:**
 
 - Python 3
+
+`Split documents` requires the pip packages 'numpy' and 'pandas'.
 
 ----------
 
@@ -39,6 +43,10 @@ In addition to the inputfolder and output*FILE* (not folder!) a third argument c
     dbnl_xml_to_csv.py [input_folder] [output_file] optional: [-chapters]
     Provide the 'chapters' argument to print each chapter on a separate line in the csv
     Example: dbnl_xml_to_csv.py "C:\testfiles" "C:\output.csv" -chapters
+
+----------
+## `split_documents`
+This is a script that was created to extract each row from an Excelsheet and write it to a txt file. You can change the inputfile and output directory at the top of the script and simply run it with your debugger (or such).
 
 ----------
 ## Additional testdata
