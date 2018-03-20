@@ -1,0 +1,45 @@
+headers = [
+    'DAT',
+    'AUT',
+    'PSN',
+    'TIT',
+    'IMP',
+    'PAG',
+    'FMT',
+    'COL',
+    'AAR',
+    'TAA',
+    'PLT',
+    'ABS',
+    'EX_CB',
+    'EX_GA',
+    'EX_KB',
+    'EX_MN',
+    'EX_MM',
+    'AN_CB',
+    'AN_GA',
+    'AN_KB',
+    'AN_MN',
+    'AN_MM',
+    'BYZ',
+    'EXE',
+    'GED',
+    'MFN',
+    'REG',
+    'MUT',
+    'INV',
+    'REC',
+    'VWN',
+    'MEL',
+    'MOT',
+    'WAT',
+    'STR',
+    'ILL',
+    'GEN',
+    'EXF'
+]
+
+class row:
+    def __init__(self):
+        self.data = dict( [( header, "") for header in headers ])
+ 
