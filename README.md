@@ -7,7 +7,9 @@ The scripts in this project work together to extract relevant information and da
 
 - `remove_html_entities_from_xml` is a helper script that reads all xml files from a folder and replaces html-entities in them. Note that the list of html-entities replaced is not exhaustive (more below).
 
-- `split_documents` is a script that extracts rows from an Excelsheet and writes the content of each row to a separate txt file. 
+- `split_documents` is a script that extracts rows from an Excelsheet and writes the content of each row to a separate txt file.
+
+- `txt_to_xlsx` is a script to convert data from txt to xlsx (specifically for the files in the Surfdrive folder 'Aliesdatabasegelegenheidsgedichten') 
 
 
 **Prerequisites:**
@@ -47,6 +49,10 @@ In addition to the inputfolder and output*FILE* (not folder!) a third argument c
 ----------
 ## `split_documents`
 This is a script that was created to extract each row from an Excelsheet and write it to a txt file. You can change the inputfile and output directory at the top of the script and simply run it with your debugger (or such).
+
+----------
+## `txt_to_xlsx`
+This script was written to convert data in the txts in the folder 'Aliesdatabasegelegenheidsgedichten'. Note that not every record has the same fields. Change the input- and outputfile at the top of the script and simply run it with your debugger (or such).
 
 ----------
 ## Additional testdata
