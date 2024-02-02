@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+title: Poets and Profits scripts
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Alex
+    family-names: Hebing
+  - given-names: Jelmer
+    name-particle: van
+    family-names: Nuss
+repository-code: 'https://github.com/UUDigitalHumanitieslab/poets_and_profit'
+abstract: >-
+  The scripts in this project work together to extract
+  relevant information and data from xml files from dbnl and
+  put this data in a csv for further processing in Access,
+  NVivo, etc.
+license: BSD-3-Clause
